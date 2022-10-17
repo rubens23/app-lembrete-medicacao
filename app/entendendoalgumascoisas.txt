@@ -1,0 +1,127 @@
+entendendo o bug da quantidade de doses na activity de detalhes do medicamento
+
+- quando eu vejo as doses do dipirona, fica certo, quatro doses.
+- só que quando eu vejo as doses do cataflam fica errado.
+Sao duas doses, porém só a primeira dose aparece
+
+- quando eu cadastro o cataflam, 4 doses com a primeira dose
+as 12:00, obtenho 12, 18, 18, 18 no logcat e 12, 18 na activity
+
+- quando cadastro o dipirona quatro doses com inicio as 20:00
+obtenho 20, 2, 8, 14 no logcat e 12, 18 na activity
+
+- ou seja, tenho os seguintes erros:
+- o adapter não está passando os dados certos na recycler view
+- o logcat não está logando os horarios de doses certo do cataflam
+de 6 em 6horas começando em 12h
+
+
+testes:
+- logar quando o codigo começa a printar varios 18h no cataflam
+
+    hipotese: eu exclui meia noite da equacao
+        - se o numero for maior que 24, ele cai em uma condição
+        - se o numero for menor que 24, ele cai em outra condição
+        - mas e se o numero for igual a 24?
+
+
+
+beleza agora vamos analisar os resultados:
+
+- dipirona 4 doses com inicio as 20:00 printa no log
+20, 2, 8, 14. na activity: 20, 2, 8, 14, 20
+
+- cataflam 4 doses com inicio as 12h printa no log
+12, 18, 0, 6. na activity: 12, 18, 0, 6, 12
+
+    hiopotese: na activity alguma coisa esta fazendo printar uma dose a mais.
+        testes
+            - checar se a lista esta sendo passada corretamente para o adapter
+            - no adapter checar se o bind dos dados esta ocorrendo da forma correta
+            - reduzir o numero de iteraçoes de novo e ver os resultados
+
+        resultados
+            - ele ta entrando no ultimo loop sem necessidade,
+            porém ai caimos no erro anterior, quando eu reduzi o numero
+            de iterações e caí naquele outro bug, pq agora seria diferente.
+
+            - dipirona com 4 doses e inicio as 20h printa no log
+            20, 2, 8, 14
+            - testelista e testehora printam coisas diferentes no log
+            testehora printa uma dose a menos e testelista printa a
+            quantidade correta de doses, pq isso acontece?
+
+            - quando a iteração chega no 3 o log ta assim
+            1: 20, 2: 2, 3: 8
+            - ele não printa no log pq ele só printa no começo
+            e ele só faz a atribuição no começo ante do valor ser atribuido
+
+            - então ele está passando os valores corretos para a lista,
+            que é o que importa. agora vamos investigar se todos os
+            medicamentos estao sendo passados corretamente para a lista
+
+
+            teste: medicamentos estao indo corretamente para a lista?
+                resultados
+                    - quando o medicamento tem o mesmo nome de outro medicamento
+                    ele pega o numero de doses do medicamento antigo.
+
+
+
+
+premissa: uma pessoa não pode tomar 2 medicamento iguais ao mesmo tempo em horarios diferentes
+
+    - implementação: se o medicamento já estiver no banco de dados não permite
+        - resultados
+            - eu implementei isso, porém o toast quando a pessoa cadastra o medicamento
+            aparece como cadastrado com sucesso.
+            não é isso que eu quero, eu quero que apareça uma mensagem de erro, de
+            preferencia uma que diga: erro: medicamento já está sendo tomado
+
+
+
+
+
+Finalmente vamos para a parte da recyclerView
+
+planejamento da implementação dessa funcionalidade:
+
+- tenho que colocar a recycler view no lugar correto
+    - mas qual seria o local correto? imagino que tenha que ser no
+    proprio item...
+    - eu ja coloquei uma recycler view no proprio item?
+
+
+    - na hora de popular os dados no item da recyclerview
+    como nome do medicamento e hora da dose, teria
+    como colocar as bolinhas dinamicamente?
+
+
+
+
+Tenho que entender como fazer isso. Eu poderia usar esse metodo que acabei de aprender na aula do Kaique
+mas eu não quero colocar um em baixo do outro. eu cor
+
+
+eu coloquei a recycler view direto no item. Como fazer para colocar os dois juntos?
+
+
+PASSO A PASSO PARA MOSTRAR AS DOSES
+
+- refenciar e inicializar esse recycler view(rvDose) dentro do adapter
+- passar uma lista que contem a conttagem de doses, junto com
+o dado booleano de dose tomada ou não.
+- nesse novo adapter, eu refereencio esse layout do item da dose.
+- para cada item de dose tem que mostrar esse item na lista
+
+
+
+- eu tenho um medicamento que tem as doses que eu quero. mas o
+recyclerview adapter pede por uma lista
+
+- sempre no bind eu vou reinstanciar o adapter entao eu sempre vou
+mandar uma lista nova sempre, na verdade eu vou mandar
+o medicamento e assim que ele iniciar o adapter ele popula a lista
+e passa para o adapter
+
+
