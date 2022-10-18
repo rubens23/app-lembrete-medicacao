@@ -52,3 +52,7 @@ eu vou criar essa tabela e tentar popular ela com dados, depois eu tento criar a
     - o valor padrao vai ser inicialmente igual ao total de dias totais de tratamento, pq
     todo tratamento quando inicia, tem como total de dias restantes o mesmo numero total de dias
     de tratamento, pois o tratamento foi iniciado naquele dia
+
+- eu to conseguindo atualizar a tabela de medicamentos, reduzindo os dias restantes e resetando as doses tomadas
+- agora eu tenho que voltar a mostrar a primeira dose na recycler view da activity principal.(ja implementei)
+    - por enquanto eu tenho que atualizar o app para ele mostrar o resultado do reset

@@ -39,6 +39,12 @@ interface MedicamentoDaoTeste {
     @Query("UPDATE medicamentoteste SET tratamentoFinalizado=:finalizado WHERE nomeMedicamento=:nomeRemedio")
     suspend fun finalizarMedicamento(finalizado: Boolean, nomeRemedio: String)
 
+    @Query("UPDATE medicamentoteste SET diasRestantesDeTratamento=:diasRestantes WHERE nomeMedicamento=:nomeRemedio")
+    suspend fun diaConcluido(diasRestantes: Int, nomeRemedio: String)
+
+    @Query("UPDATE doses SET jaTomouDose=:naoTomou WHERE nomeMedicamento=:nomeRemedio")
+    suspend fun resetarDosesTomadasParaDiaNovoDeTratamento(naoTomou: Boolean, nomeRemedio: String)
+
 
 
 }

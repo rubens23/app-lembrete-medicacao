@@ -58,10 +58,12 @@ class MedicamentosAdapter(private val list: ArrayList<MedicamentoComDoses>, cont
                     definiuProxDose = false
                 }else if(i == medicamento?.listaDoses?.size-1 && horarioDose.jaTomouDose){
                     proxDose = "-"
-                    //aqui ele tem que excluir o medicamento e colocar numa tabela de historico de medicamentos
+                    //aqui ele tem que verificar se ainda tem dias restantes de tratamento e
+                    //se sim, diminuir um na quantidade de dias restantes de tratamento
                     GlobalScope.launch {
                         val db = AppDatabase.getAppDatabase(binding.root.context)?.medicamentoDaoTeste
-                        db?.finalizarMedicamento(true, medicamento.medicamentoTeste.nomeMedicamento)
+                        db?.diaConcluido(medicamento.medicamentoTeste.diasRestantesDeTratamento - 1, medicamento.medicamentoTeste.nomeMedicamento)
+                        db?.resetarDosesTomadasParaDiaNovoDeTratamento(false, medicamento.medicamentoTeste.nomeMedicamento)
                     }
 
                 }
