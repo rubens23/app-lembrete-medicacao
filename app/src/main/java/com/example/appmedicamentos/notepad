@@ -1,0 +1,29 @@
+1- o que eu vou precisar ter na tabela historico medicamentos?
+2- Qual é o relacionamento entre tabela medicamentos e historico medicamentos?
+
+
+nomeMedicamento
+periodoTotatlTratamento(em dias)
+dataFinalização
+
+
+
+- aqui eu imagino que eu possa ter dois medicamentos com o mesmo nome pq uma mesma pessoa pode tomar o mesmo medicamento
+só que em periodos diferentes
+- o que vai ser unico sera o nome do medicamento em conjunto com a data de finalização
+tipo dipirona finalização(18/10/2022) n vai permitir outro dipirona com finalização em 18/10/2022,
+ou seja, nessa tabela HistoricoMedicamentos eu vou ter uma chave composta(nomeMedicamento e dataFinalização)
+
+
+historicoMedicamento recebe medicamento
+
+
+historicomedicamentos recebe todos os medicamentos que foram finalizados ele vai pegar os dias de tratamento e o nome do medicamento
+
+
+eu tenho que ter uma referencia a medicaemnto na tabela historicodemedicamentos pq eu vou precisar pegar o periodo total de tratamento
+- lembrando que eu vou ter que excluir o medicamento da tabela de medicamentos pq eu n quero mostrar mais ele na recycler
+depois que ele for finalizado
+
+
+eu vou criar essa tabela e tentar popular ela com dados, depois eu tento criar a classe de relacionamento entre medicamento e historicomedicamentos

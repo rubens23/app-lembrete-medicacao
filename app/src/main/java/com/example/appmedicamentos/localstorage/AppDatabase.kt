@@ -17,9 +17,10 @@ import com.example.appmedicamentos.roomrelationstutorial.entities.Dog
 import com.example.appmedicamentos.roomrelationstutorial.entities.Owner
 import com.example.appmedicamentos.testebancomedicamentos.daos.MedicamentoDaoTeste
 import com.example.appmedicamentos.testebancomedicamentos.entities.Doses
+import com.example.appmedicamentos.testebancomedicamentos.entities.HistoricoMedicamentos
 import com.example.appmedicamentos.testebancomedicamentos.entities.MedicamentoTeste
 
-@Database(entities = [MedicamentoTeste::class, Doses::class], version = 1)
+@Database(entities = [MedicamentoTeste::class, Doses::class, HistoricoMedicamentos::class], version = 1)
 abstract class AppDatabase : RoomDatabase(){
 
     // TODO: eu tenho que salvar um medicamento novo e suas doses e garantir que só tenha um medicamento daquele por vez 
