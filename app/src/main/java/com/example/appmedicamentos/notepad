@@ -27,3 +27,28 @@ depois que ele for finalizado
 
 
 eu vou criar essa tabela e tentar popular ela com dados, depois eu tento criar a classe de relacionamento entre medicamento e historicomedicamentos
+
+
+- como eu vou fazer pra salvar algo no banco HistoricoMedicamentos?
+    - pra fazer isso eu primeiro tenho que implementar os resets e
+    contadores de dias.
+    - quando o user terminar as doses do dia eu diminuo um dia no tratamento
+    - porem, e se o usuario n marcar que ele tomou as doses do dia, as doses
+    do dia continuarão la? Isso é errado, pq se o tratamento do paciente é 5 dias,
+    tem que durar 5 dias, eu n sei se ele pode ir ate o sexto...
+    - mas pra fins de simplicidade eu vou implementar assim mesmo.
+    - Como o app nao vai ser publicado na playstore ainda(por causa que eu n considero ele 100% seguro)
+    eu vou deixar esse detahe passar por enquanto.
+
+
+    - eu acho que eu vou tentar colocar esse dado de quantidade de dias restantes no data store
+    - quando ele coloca aquele tracinho no item da recyclerview, significa que ele terminou as doses
+    do dia. Eu acho que é ali que eu posso resetar tudo
+    - chegou no tracinho reseta as doses tomadas todas para false e diminui um no totalDiasDeTratamento
+    - porém tenho um problema. Eu n quero subtrair direto do totalDiasTratamento pq eu quero passar o
+    medicamento para a tabela historicoMedicamtos com o dado original de totalDeDiasDeTratament
+    - criar coluna diasRestantesDeTratamento, mas qual sera o valor default? Quando eu passar o
+    novo medicamento para a tabela, eu vou precisar passar um valor de dias restantes
+    - o valor padrao vai ser inicialmente igual ao total de dias totais de tratamento, pq
+    todo tratamento quando inicia, tem como total de dias restantes o mesmo numero total de dias
+    de tratamento, pois o tratamento foi iniciado naquele dia

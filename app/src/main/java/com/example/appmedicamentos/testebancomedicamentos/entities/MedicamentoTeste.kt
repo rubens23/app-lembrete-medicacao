@@ -12,5 +12,6 @@ data class MedicamentoTeste(
     val horaPrimeiraDose: String,
     val qntDoses: Int,
     val totalDiasTratamento: Int,
+    val diasRestantesDeTratamento: Int,
     val tratamentoFinalizado: Boolean
 ): Serializable

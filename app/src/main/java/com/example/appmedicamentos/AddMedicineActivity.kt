@@ -128,7 +128,8 @@ class AddMedicineActivity : AppCompatActivity() {
                         totalDiasTratamento = qntDiasTrat,
                         horaPrimeiraDose = horarioPrimeiraDose,
                         qntDoses = qntDoses,
-                        tratamentoFinalizado = false
+                        tratamentoFinalizado = false,
+                        diasRestantesDeTratamento = qntDiasTrat
                     )
                 )
 
