@@ -4,15 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.appmedicamentos.adapters.MedicamentosAdapter
 import com.example.appmedicamentos.databinding.ActivityMainBinding
 import com.example.appmedicamentos.localstorage.AppDatabase
-import com.example.appmedicamentos.models.Medicamento
-import com.example.appmedicamentos.testebancomedicamentos.entities.MedicamentoTeste
 import com.example.appmedicamentos.testebancomedicamentos.relations.MedicamentoComDoses
 import com.example.appmedicamentos.ui.viewmodels.MainActivityViewModel
 import dagger.hilt.android.AndroidEntryPoint

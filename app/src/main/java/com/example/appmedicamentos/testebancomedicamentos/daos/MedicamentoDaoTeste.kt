@@ -1,10 +1,8 @@
 package com.example.appmedicamentos.testebancomedicamentos.daos
 
 import androidx.room.*
-import com.example.appmedicamentos.MedicamentoDose
-import com.example.appmedicamentos.models.Medicamento
-import com.example.appmedicamentos.philliplacknerrelationtutorial.entities.relations.*
 import com.example.appmedicamentos.testebancomedicamentos.entities.Doses
+import com.example.appmedicamentos.testebancomedicamentos.entities.HistoricoMedicamentos
 import com.example.appmedicamentos.testebancomedicamentos.entities.MedicamentoTeste
 import com.example.appmedicamentos.testebancomedicamentos.relations.MedicamentoComDoses
 
@@ -18,6 +16,15 @@ interface MedicamentoDaoTeste {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertDose(dose: Doses): Long
+
+
+
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun insertNaTabelaHistoricoMedicamentos(novoMedicamentoFinalizado: HistoricoMedicamentos): Long
+
+
+
 
     @Transaction
     @Query("SELECT * FROM MedicamentoTeste WHERE nomeMedicamento = :nomeMedicamento")
@@ -44,6 +51,12 @@ interface MedicamentoDaoTeste {
 
     @Query("UPDATE doses SET jaTomouDose=:naoTomou WHERE nomeMedicamento=:nomeRemedio")
     suspend fun resetarDosesTomadasParaDiaNovoDeTratamento(naoTomou: Boolean, nomeRemedio: String)
+
+    @Query("DELETE FROM medicamentoteste WHERE nomeMedicamento =:nomeRemedio")
+    fun deleteMedicamentoFromMedicamentoTeste(nomeRemedio: String)
+
+    @Query("DELETE FROM Doses WHERE nomeMedicamento = :nomeRemedio")
+    fun deleteDosesDoMedicamentoFinalizado(nomeRemedio: String)
 
 
 

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.lifecycleScope
 import com.example.appmedicamentos.R
+import com.example.appmedicamentos.localstorage.AppDatabase
 import com.example.appmedicamentos.testebancomedicamentos.entities.Doses
 import com.example.appmedicamentos.testebancomedicamentos.entities.MedicamentoTeste
 import com.example.appmedicamentos.testebancomedicamentos.relations.MedicamentoComDoses
@@ -23,7 +24,7 @@ class MedicamentosActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_medicamentos)
 
-        val dao = DatabaseMedicamentos.getInstance(this).medicamentoDaoTeste
+        val dao = AppDatabase.getAppDatabase(this)?.medicamentoDaoTeste
 
 
         /*

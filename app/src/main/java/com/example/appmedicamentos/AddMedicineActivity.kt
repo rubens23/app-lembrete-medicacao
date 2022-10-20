@@ -7,17 +7,11 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
-import androidx.room.Room
 import com.example.appmedicamentos.databinding.ActivityAddMedicineBinding
-import com.example.appmedicamentos.localstorage.AppDatabase
-import com.example.appmedicamentos.models.HorarioDose
-import com.example.appmedicamentos.models.Medicamento
 import com.example.appmedicamentos.testebancomedicamentos.entities.Doses
 import com.example.appmedicamentos.testebancomedicamentos.entities.MedicamentoTeste
 import com.example.appmedicamentos.ui.viewmodels.AddMedicineViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class AddMedicineActivity : AppCompatActivity() {
@@ -212,6 +206,7 @@ class AddMedicineActivity : AppCompatActivity() {
             horarioDose = horaIni.toString()+":"+min+"h",
             jaTomouDose = false
         )
+
         //listaHorarioDoses.add(HorarioDose(horaIni.toString()+":"+min+"h", false))
         listaHorarioDoses.add(medicamentoPrimeiraDose)
         Log.d("controlelistadoses", "horario de dose adicionado na lista: ${horaIni.toString()+":"+min+"h"}")

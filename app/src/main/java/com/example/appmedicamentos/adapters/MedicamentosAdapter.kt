@@ -16,6 +16,7 @@ import com.example.appmedicamentos.localstorage.daos.MedicamentoDoseDao
 import com.example.appmedicamentos.models.Medicamento
 import com.example.appmedicamentos.testebancomedicamentos.daos.MedicamentoDaoTeste
 import com.example.appmedicamentos.testebancomedicamentos.entities.Doses
+import com.example.appmedicamentos.testebancomedicamentos.entities.HistoricoMedicamentos
 import com.example.appmedicamentos.testebancomedicamentos.entities.MedicamentoTeste
 import com.example.appmedicamentos.testebancomedicamentos.relations.MedicamentoComDoses
 import kotlinx.coroutines.GlobalScope
@@ -60,10 +61,33 @@ class MedicamentosAdapter(private val list: ArrayList<MedicamentoComDoses>, cont
                     proxDose = "-"
                     //aqui ele tem que verificar se ainda tem dias restantes de tratamento e
                     //se sim, diminuir um na quantidade de dias restantes de tratamento
+                    //todo alterar o valor do if para > 1 e testar
                     GlobalScope.launch {
                         val db = AppDatabase.getAppDatabase(binding.root.context)?.medicamentoDaoTeste
-                        db?.diaConcluido(medicamento.medicamentoTeste.diasRestantesDeTratamento - 1, medicamento.medicamentoTeste.nomeMedicamento)
-                        db?.resetarDosesTomadasParaDiaNovoDeTratamento(false, medicamento.medicamentoTeste.nomeMedicamento)
+                        if(medicamento.medicamentoTeste.diasRestantesDeTratamento > 1){
+                            db?.diaConcluido(medicamento.medicamentoTeste.diasRestantesDeTratamento - 1, medicamento.medicamentoTeste.nomeMedicamento)
+                            db?.resetarDosesTomadasParaDiaNovoDeTratamento(false, medicamento.medicamentoTeste.nomeMedicamento)
+                        }else{
+                            //tiro da lista de medicamento e passo para a lista de historico de medicamentos
+                            //como eu estou dentro da coroutine eu ja posso chamar o metodo daqui
+                            //vai ser um metodo de insert para a tabela historico medicamentos
+                            //e depois um metodo de delete para o medicamento que foi finalizado
+
+
+                            db?.insertNaTabelaHistoricoMedicamentos(HistoricoMedicamentos(
+                                medicamento.medicamentoTeste.nomeMedicamento,
+                                medicamento.medicamentoTeste.totalDiasTratamento,
+                                "18/10/2022"
+                            ))
+
+
+
+
+                            db?.deleteMedicamentoFromMedicamentoTeste(medicamento.medicamentoTeste.nomeMedicamento)
+                            db?.deleteDosesDoMedicamentoFinalizado(medicamento.medicamentoTeste.nomeMedicamento)
+                            Log.d("terminoumedicamento", "Voce terminou de tomar esse medicamento!")
+                        }
+
                     }
 
                 }

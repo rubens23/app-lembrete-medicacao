@@ -2,18 +2,12 @@ package com.example.appmedicamentos.adapters
 
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.appmedicamentos.MedicamentoDose
 import com.example.appmedicamentos.databinding.ItemDoseTomadaBinding
-import com.example.appmedicamentos.localstorage.AppDatabase
-import com.example.appmedicamentos.localstorage.daos.MedicamentoDoseDao
 import com.example.appmedicamentos.models.Medicamento
 import com.example.appmedicamentos.testebancomedicamentos.entities.Doses
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 class DosesTomadasAdapter(
     val dose: Medicamento,

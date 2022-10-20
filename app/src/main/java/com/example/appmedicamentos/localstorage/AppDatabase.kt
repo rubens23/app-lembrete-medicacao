@@ -12,6 +12,7 @@ import com.example.appmedicamentos.localstorage.daos.MedicamentoDao
 import com.example.appmedicamentos.localstorage.daos.MedicamentoDoseDao
 import com.example.appmedicamentos.models.HorarioDosesTypeConverter
 import com.example.appmedicamentos.models.Medicamento
+import com.example.appmedicamentos.philliplacknerrelationtutorial.entities.relations.StudentSubjectCrossRef
 import com.example.appmedicamentos.roomrelationstutorial.daos.DogsAndOwnersDao
 import com.example.appmedicamentos.roomrelationstutorial.entities.Dog
 import com.example.appmedicamentos.roomrelationstutorial.entities.Owner
@@ -20,21 +21,26 @@ import com.example.appmedicamentos.testebancomedicamentos.entities.Doses
 import com.example.appmedicamentos.testebancomedicamentos.entities.HistoricoMedicamentos
 import com.example.appmedicamentos.testebancomedicamentos.entities.MedicamentoTeste
 
-@Database(entities = [MedicamentoTeste::class, Doses::class, HistoricoMedicamentos::class], version = 1)
-abstract class AppDatabase : RoomDatabase(){
+@Database(
+    entities = [MedicamentoTeste::class,
+        Doses::class,
+        HistoricoMedicamentos::class],
+    version = 1
+)
+abstract class AppDatabase : RoomDatabase() {
 
-    // TODO: eu tenho que salvar um medicamento novo e suas doses e garantir que só tenha um medicamento daquele por vez 
-    // TODO: tanto na tabela doses quanto na tabela medicamentos 
+    //todo: resolver esse erro do n reconhecimento da entity
+
 
     abstract val medicamentoDaoTeste: MedicamentoDaoTeste
 
-    companion object{
+    companion object {
 
-        private var INSTANCE: AppDatabase?= null
+        private var INSTANCE: AppDatabase? = null
 
 
-        fun getAppDatabase(context: Context): AppDatabase?{
-            if(INSTANCE == null){
+        fun getAppDatabase(context: Context): AppDatabase? {
+            if (INSTANCE == null) {
 
                 INSTANCE = Room.databaseBuilder<AppDatabase>(
                     context.applicationContext,
@@ -49,7 +55,7 @@ abstract class AppDatabase : RoomDatabase(){
 
     }
 
-    fun destroyInstance(){
+    fun destroyInstance() {
         INSTANCE = null
     }
 }
