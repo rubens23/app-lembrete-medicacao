@@ -18,8 +18,13 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    //todo estudar sobre relacionamento entre tabelas utilizando o room
+    //estudar sobre relacionamento entre tabelas utilizando o room
     //https://medium.com/androiddevelopers/database-relations-with-room-544ab95e4542
+
+    //todo: fazer o insert novo aparecer na main activity sem precisar reiniciar o app
+    //quando eu tento cadastrar um medicamento com dose inicial as 9:00 ele n deixa cadastrar o medicamento, pq isso esta acontecendo?
+
+    //todo: quando o medicamento termina ele atualiza a hora mesmo que a pessoa n precise tomar mais o medicamento no dia seguinte
 
 
 
@@ -39,76 +44,19 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
-
-
-
-
-
-
-        val db = AppDatabase.getAppDatabase(this)
-       // lifecycleScope.launch { db?.medicamentoDoseDao()?.deleteAllFromMedicamentoDose() }
-       // lifecycleScope.launch { db?.medicamentoDao()?.deleteAll() }
-
-        lifecycleScope.launch {
-           // val listaDoses = db?.medicamentoDoseDao()!!.getAll()
-            //listaDoses.forEach {
-                //todosMedicamentosComDose.add(it)
-           // }
-            //getList(todosMedicamentosComDose)
-        }
-
-        /*
-        lifecycleScope.launch {
-            val listaDoses = db?.medicamentoDoseDao()!!.getAllDoses("aspirina")
-            listaDoses.forEach {
-                todosMedicamentosComDose.add(it)
-            }
-            getList(todosMedicamentosComDose)
-        }
-
-         */
-        //lifecycleScope.launch { db?.medicamentoDao()?.deleteAll() }
-
-
-
-
-        lifecycleScope.launch {
-            //allMedicamentosInUse.postValue(db?.medicamentoDao()!!.getAllMedicamentosInUse())
-
-
-        }
-        /*
-        esse observer que eu estou fazendo é correto, mas o acesso ao banco de dados deve ser feito
-        atraves de viewmodels e repositories
-         */
-
-        /*
-        allMedicamentosInUse.observe(this, Observer {
-            if (it.isNotEmpty()) {
-
-                binding.txtNoData.visibility = View.INVISIBLE
-                binding.caixaVazia.visibility = View.INVISIBLE
-                adapter = MedicamentosAdapter(it as ArrayList<Medicamento>, this)
-                binding.recyclerView.adapter = adapter
-
-
-            }
-
-        })
-
-         */
-
-
+        Log.d("ciclodevida", "to no oncreate")
 
         binding.fab.setOnClickListener { view ->
             startActivity(Intent(this, AddMedicineActivity::class.java))
         }
 
         initViewModel()
+
+
+
+
     }
-    //todo o medicamento n esta atualizando automaticamente quando eu saio da addmedicine activity(n adiciona o novo medicamento na recycler view)
+    //todo colocar a quantidade de dias que faltam para a pessoa parar de tomar o medicamento
 
     private fun initViewModel(){
         viewModel = ViewModelProvider(this)[MainActivityViewModel::class.java]
@@ -116,24 +64,61 @@ class MainActivity : AppCompatActivity() {
             //recebe lista de medicamentos que usuario esta utilizando
             //a partir dessa lista eu preciso de uma lista de cada medicamento com suas doses
             if(it != null){
-                Log.d("testenullex", "tamanho da lista ${it.size}")
+                if(it.size > 0){
+                    Log.d("testenullex", "tamanho da lista ${it.size}")
+                    binding.txtNoData.visibility = View.INVISIBLE
+                    binding.caixaVazia.visibility = View.INVISIBLE
+                }
+
+                Log.d("invisible", "passando por aqui as coisas deveriam ficar invisiveis")
                 setAdapter(it)
             }
 
 
+
         }
     }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d("ciclodevida", "to no onstart")
+
+    }
     fun setAdapter(medicamentos: List<MedicamentoComDoses>?) {
-        binding.txtNoData.visibility = View.INVISIBLE
-        binding.caixaVazia.visibility = View.INVISIBLE
         adapter = MedicamentosAdapter(medicamentos as ArrayList<MedicamentoComDoses>, this)
         adapter.listaComDosesToast.observe(this){
-            it.forEach {
-                Log.d("dosesmainactivity", "dose de ${it.nomeMedicamento} as ${it.horarioDose}")
-            }
+
         }
         binding.recyclerView.adapter = adapter
 
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.d("ciclodevida", "to no onRestart")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("ciclodevida", "to no onResume")
+        viewModel.loadMedications()
+
+
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d("ciclodevida", "to no onPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d("ciclodevida", "to no onStop")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("ciclodevida", "to no onDestroy")
     }
 
     private fun getList(todosMedicamentosComDose: MutableList<MedicamentoDose>) {
@@ -158,26 +143,3 @@ class MainActivity : AppCompatActivity() {
 
 }
 
-/*
-
-
-agora eu vou começar a checar se tem alguma coisa no banco de dados
-se tiver, eu mostro a recyclerview e escondo os elementos de quando n tem nenhum medicamento cadastrado
-
-
-
-
- */
-
-/*
-a pessoa pode tomar um mesmo medicamento por 6 dias ou a pessoa pode tomar por alguns meses
-
-
-se ela colocar 2, pode significar 2 dias ou 2 meses
- */
-
-
-/*
-
-3, 4, 5
- */

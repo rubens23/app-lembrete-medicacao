@@ -154,6 +154,7 @@ class DetalhesAdapter(private val listaDosagemMedicamento: MedicamentoComDoses):
 
     }
 
+
     override fun getItemCount(): Int = listaDosagemMedicamento.listaDoses.size
 
 }

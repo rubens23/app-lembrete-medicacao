@@ -24,6 +24,7 @@ class MedicineDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMedicineDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        Log.d("ciclodevida", "to no onCreate da details activity")
 
         db = AppDatabase.getAppDatabase(this)
 
@@ -36,6 +37,37 @@ class MedicineDetailActivity : AppCompatActivity() {
         binding.medDetalhesRecyclerView.adapter = adapter
 
 
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d("ciclodevida", "to no onStart da details activity")
+
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.d("ciclodevida", "to no onStart da details activity")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("ciclodevida", "to no onResume da details activity")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d("ciclodevida", "to no onPause da details activity")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d("ciclodevida", "to no onStop da details activity")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("ciclodevida", "to no onDestroy da details activity")
     }
 
     private fun dealWithDosageTime(extra: MedicamentoComDoses) {

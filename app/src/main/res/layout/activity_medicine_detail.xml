@@ -7,6 +7,8 @@
     android:layout_marginHorizontal="16dp"
     tools:context=".MedicineDetailActivity">
 
+
+
     <TextView
         android:id="@+id/label_medicamento"
         android:layout_width="wrap_content"

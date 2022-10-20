@@ -58,7 +58,7 @@ class MedicamentosAdapter(private val list: ArrayList<MedicamentoComDoses>, cont
                 if(horarioDose.jaTomouDose && i != medicamento?.listaDoses?.size-1){
                     definiuProxDose = false
                 }else if(i == medicamento?.listaDoses?.size-1 && horarioDose.jaTomouDose){
-                    proxDose = "-"
+                    proxDose = medicamento.medicamentoTeste.horaPrimeiraDose
                     //aqui ele tem que verificar se ainda tem dias restantes de tratamento e
                     //se sim, diminuir um na quantidade de dias restantes de tratamento
                     //todo alterar o valor do if para > 1 e testar
