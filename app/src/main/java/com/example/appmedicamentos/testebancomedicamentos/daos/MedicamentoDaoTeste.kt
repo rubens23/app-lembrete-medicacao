@@ -26,6 +26,8 @@ interface MedicamentoDaoTeste {
 
 
 
+
+
     @Transaction
     @Query("SELECT * FROM MedicamentoTeste WHERE nomeMedicamento = :nomeMedicamento")
     suspend fun getMedicamentoWithDoses(nomeMedicamento: String): List<MedicamentoComDoses>
@@ -51,6 +53,9 @@ interface MedicamentoDaoTeste {
 
     @Query("UPDATE doses SET jaTomouDose=:naoTomou WHERE nomeMedicamento=:nomeRemedio")
     suspend fun resetarDosesTomadasParaDiaNovoDeTratamento(naoTomou: Boolean, nomeRemedio: String)
+
+    @Query("UPDATE medicamentoteste SET horaPrimeiraDose=:msmFinalizado WHERE nomeMedicamento=:nomeRemedio")
+    suspend fun atualizarPrimeiraDoseQuandoMedicamentoEstaFinalizado(msmFinalizado: String, nomeRemedio: String)
 
     @Query("DELETE FROM medicamentoteste WHERE nomeMedicamento =:nomeRemedio")
     fun deleteMedicamentoFromMedicamentoTeste(nomeRemedio: String)

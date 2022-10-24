@@ -169,29 +169,14 @@ class MedicineDetailActivity : AppCompatActivity() {
             Log.d("testelista", "cada horario salvo na lista: ${it.horarioDose}")
         }
 
-        insertNovaDosagemAndSetListInAdapter(nomeMed)
 
 
     }
 
-    private fun insertNovaDosagemAndSetListInAdapter(nomeMedicamento: String) {
-
-
-
-    }
 
 
 }
 
 
 
-@Entity
-data class MedicamentoDose(
-    @PrimaryKey(autoGenerate = true) val idDoseMedicamento: Int = 0,
-    val nomeMedicamento: String,
-    val horarioDose: String,
-    var TomouDose: Boolean = false
-)
-
-//todo será que a minha estrutura dos models esta errada?
 

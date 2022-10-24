@@ -101,6 +101,9 @@ class AddMedicineActivity : AppCompatActivity() {
                 qntDoses = qntDosesStr.toInt()
             }
             horarioPrimeiraDose = binding.tilTimeFirstTake.editText?.text.toString()
+            val primeiroDigitoPrimeiraDose = horarioPrimeiraDose[0].toString().toInt()
+            val segundoDigitoPrimeiraDose = horarioPrimeiraDose[1].toString().toInt()
+
 
 
 
@@ -114,6 +117,8 @@ class AddMedicineActivity : AppCompatActivity() {
                 && horarioPrimeiraDose.length == 5
                 && horarioPrimeiraDose[2].toString() == ":"
                 && qntDiasTrat != null
+                && primeiroDigitoPrimeiraDose <= 2
+                && segundoDigitoPrimeiraDose <= 4
             ) {
 
                 viewModel.insertMedicamento(

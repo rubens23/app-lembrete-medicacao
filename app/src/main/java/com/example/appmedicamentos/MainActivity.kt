@@ -63,14 +63,12 @@ class MainActivity : AppCompatActivity() {
         viewModel.medicamentos.observe(this){
             //recebe lista de medicamentos que usuario esta utilizando
             //a partir dessa lista eu preciso de uma lista de cada medicamento com suas doses
+            Log.d("medicamentocomdoses", "tamanho da lista ${it.size}")
             if(it != null){
                 if(it.size > 0){
-                    Log.d("testenullex", "tamanho da lista ${it.size}")
                     binding.txtNoData.visibility = View.INVISIBLE
                     binding.caixaVazia.visibility = View.INVISIBLE
                 }
-
-                Log.d("invisible", "passando por aqui as coisas deveriam ficar invisiveis")
                 setAdapter(it)
             }
 
@@ -83,6 +81,7 @@ class MainActivity : AppCompatActivity() {
         super.onStart()
         Log.d("ciclodevida", "to no onstart")
 
+
     }
     fun setAdapter(medicamentos: List<MedicamentoComDoses>?) {
         adapter = MedicamentosAdapter(medicamentos as ArrayList<MedicamentoComDoses>, this)
@@ -93,52 +92,18 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    override fun onRestart() {
-        super.onRestart()
-        Log.d("ciclodevida", "to no onRestart")
-    }
+
 
     override fun onResume() {
         super.onResume()
         Log.d("ciclodevida", "to no onResume")
+        //ele chama loadmedications que retorna uma lista com doses, só que a lista com doses era pra estar vazia
         viewModel.loadMedications()
 
 
     }
 
-    override fun onPause() {
-        super.onPause()
-        Log.d("ciclodevida", "to no onPause")
-    }
 
-    override fun onStop() {
-        super.onStop()
-        Log.d("ciclodevida", "to no onStop")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d("ciclodevida", "to no onDestroy")
-    }
-
-    private fun getList(todosMedicamentosComDose: MutableList<MedicamentoDose>) {
-        //Log.d("testemainactivitylista", "${todosMedicamentosComDose[0].nomeMedicamento} ${todosMedicamentosComDose[0].horarioDose} tomou? ${todosMedicamentosComDose[0].TomouDose}")
-
-        for(i in 0..todosMedicamentosComDose.size-1){
-            if(todosMedicamentosComDose[i].nomeMedicamento == "aspirina"){
-                if(todosMedicamentosComDose[i].TomouDose){
-                    Log.d("testemainactivitylista", "${todosMedicamentosComDose[i].nomeMedicamento} ${todosMedicamentosComDose[i].horarioDose} tomou? ${todosMedicamentosComDose[i].TomouDose}")
-
-                }
-
-            }
-            //Log.d("testemainactivitylista", "${todosMedicamentosComDose[i].nomeMedicamento} ${todosMedicamentosComDose[i].horarioDose} tomou? ${todosMedicamentosComDose[i].TomouDose}")
-        }
-
-
-
-
-    }
 
 
 }

@@ -1,6 +1,5 @@
 package com.example.appmedicamentos.data.repository
 
-import com.example.appmedicamentos.localstorage.daos.MedicamentoDao
 import com.example.appmedicamentos.testebancomedicamentos.daos.MedicamentoDaoTeste
 import com.example.appmedicamentos.testebancomedicamentos.entities.MedicamentoTeste
 import com.example.appmedicamentos.testebancomedicamentos.relations.MedicamentoComDoses

@@ -80,6 +80,9 @@ dependencies {
 
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 
+    //maskara https://github.com/santalu/maskara
+    implementation 'com.github.santalu:maskara:1.0.0'
+
 
 
     

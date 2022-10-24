@@ -27,6 +27,11 @@ class DetalhesAdapter(private val listaDosagemMedicamento: MedicamentoComDoses):
     inner class ViewHolder(val binding: ItemDetalhesMedicamentosBinding): RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("ServiceCast", "SetTextI18n")
         fun bind(doses: Doses){
+
+
+
+
+
             db = AppDatabase.getAppDatabase(binding.root.context)
             medicamentoDoseDao = db!!.medicamentoDaoTeste
 
@@ -41,16 +46,13 @@ class DetalhesAdapter(private val listaDosagemMedicamento: MedicamentoComDoses):
 
 
 
-
-
-
-
             binding.itemMedicamento.setOnClickListener {
                 if(!doses.jaTomouDose){
                     //mostrar o dialog confirmando a dose a ser tomada
                     val alert: android.app.AlertDialog.Builder = android.app.AlertDialog.Builder(binding.root.context)
                     alert.setTitle("Tomar ${doses.nomeMedicamento}")
-                    alert.setMessage("Você quer tomar a dose de ${doses.horarioDose}h agora?")
+                    alert.setMessage("Você quer tomar a dose de ${doses.horarioDose} agora?")
+                    Log.d("testehora", "${doses.horarioDose}")
                     alert.setPositiveButton("Sim", DialogInterface.OnClickListener { dialog, which ->
 
                         GlobalScope.launch {
@@ -70,7 +72,7 @@ class DetalhesAdapter(private val listaDosagemMedicamento: MedicamentoComDoses):
                     //mostrar o dialog confirmando a dose a ser tomada
                     val alert: android.app.AlertDialog.Builder = android.app.AlertDialog.Builder(binding.root.context)
                     alert.setTitle("Dose Tomada!")
-                    alert.setMessage("Você já tomou a dose das ${doses.horarioDose}h!")
+                    alert.setMessage("Você já tomou a dose das ${doses.horarioDose}!")
                     alert.setPositiveButton("OK", DialogInterface.OnClickListener { dialog, which ->
 
 
@@ -88,7 +90,7 @@ class DetalhesAdapter(private val listaDosagemMedicamento: MedicamentoComDoses):
                     //mostrar o dialog confirmando a dose a ser tomada
                     val alert: android.app.AlertDialog.Builder = android.app.AlertDialog.Builder(binding.root.context)
                     alert.setTitle("Tomar ${doses.nomeMedicamento}")
-                    alert.setMessage("Você quer tomar a dose de ${doses.horarioDose}h agora?")
+                    alert.setMessage("Você quer tomar a dose de ${doses.horarioDose} agora?")
                     alert.setPositiveButton("Sim", DialogInterface.OnClickListener { dialog, which ->
 
                         GlobalScope.launch {
@@ -108,7 +110,7 @@ class DetalhesAdapter(private val listaDosagemMedicamento: MedicamentoComDoses):
                     //mostrar o dialog confirmando a dose a ser tomada
                     val alert: android.app.AlertDialog.Builder = android.app.AlertDialog.Builder(binding.root.context)
                     alert.setTitle("Dose Tomada!")
-                    alert.setMessage("Você já tomou a dose das ${doses.horarioDose}h!")
+                    alert.setMessage("Você já tomou a dose das ${doses.horarioDose}!")
                     alert.setPositiveButton("OK", DialogInterface.OnClickListener { dialog, which ->
 
 

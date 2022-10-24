@@ -23,7 +23,6 @@ class MainActivityViewModel @Inject constructor(
         loadMedications()
     }
 
-    //fun getMedicamentosObserver(): MutableLiveData<List<MedicamentoComDoses>> = medicamentos
 
     fun loadMedications(){
         val list = medicationRepository.getMedicamentos()
@@ -34,6 +33,8 @@ class MainActivityViewModel @Inject constructor(
     fun insertMedicamentos(medicamento: MedicamentoTeste){
         medicationRepository.insertMedicamento(medicamento)
     }
+
+
 
 
 }
