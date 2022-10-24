@@ -16,6 +16,9 @@ import com.example.appmedicamentos.testebancomedicamentos.entities.HistoricoMedi
 import com.example.appmedicamentos.testebancomedicamentos.relations.MedicamentoComDoses
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class MedicamentosAdapter(private val list: ArrayList<MedicamentoComDoses>, context: Context): RecyclerView.Adapter<MedicamentosAdapter.ViewHolder>() {
     private var db: AppDatabase? = null
@@ -62,16 +65,15 @@ class MedicamentosAdapter(private val list: ArrayList<MedicamentoComDoses>, cont
                             db?.diaConcluido(medicamento.medicamentoTeste.diasRestantesDeTratamento - 1, medicamento.medicamentoTeste.nomeMedicamento)
                             db?.resetarDosesTomadasParaDiaNovoDeTratamento(false, medicamento.medicamentoTeste.nomeMedicamento)
                         }else{
-                            //tiro da lista de medicamento e passo para a lista de historico de medicamentos
-                            //como eu estou dentro da coroutine eu ja posso chamar o metodo daqui
-                            //vai ser um metodo de insert para a tabela historico medicamentos
-                            //e depois um metodo de delete para o medicamento que foi finalizado
+                           val sdf = SimpleDateFormat("dd/MM/yyyy")
+                            val c = Calendar.getInstance()
+                            val date = sdf.format(c.time)
 
 
                             db?.insertNaTabelaHistoricoMedicamentos(HistoricoMedicamentos(
                                 medicamento.medicamentoTeste.nomeMedicamento,
                                 medicamento.medicamentoTeste.totalDiasTratamento,
-                                "18/10/2022"
+                                date
                             ))
 
 
