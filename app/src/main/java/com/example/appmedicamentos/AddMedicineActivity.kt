@@ -117,10 +117,8 @@ class AddMedicineActivity : AppCompatActivity() {
                 && horarioPrimeiraDose.length == 5
                 && horarioPrimeiraDose[2].toString() == ":"
                 && qntDiasTrat != null
-                && primeiroDigitoPrimeiraDose <= 2
-                && segundoDigitoPrimeiraDose <= 4
             ) {
-
+                //aplicar mascara aqui pra n permitir valores maiores que 24 horas
                 viewModel.insertMedicamento(
                     MedicamentoTeste(
                         nomeMedicamento = nomeRemedio,

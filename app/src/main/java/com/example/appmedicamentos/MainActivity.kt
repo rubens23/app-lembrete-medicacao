@@ -1,10 +1,18 @@
 package com.example.appmedicamentos
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.appmedicamentos.adapters.MedicamentosAdapter
@@ -34,6 +42,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var adapter: MedicamentosAdapter
     lateinit var viewModel: MainActivityViewModel
+    val CHANNEL_ID = "ForegroundServiceChannel"
+
 
 
 
@@ -56,6 +66,12 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
+
+
+
+
+
     //todo colocar a quantidade de dias que faltam para a pessoa parar de tomar o medicamento
 
     private fun initViewModel(){
@@ -101,10 +117,19 @@ class MainActivity : AppCompatActivity() {
         viewModel.loadMedications()
 
 
+
+
+
+
+
+
     }
 
 
 
 
 }
+
+//documentacao das notificaçoes:
+//https://developer.android.com/develop/ui/views/notifications/build-notification#kts
 
